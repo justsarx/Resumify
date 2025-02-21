@@ -67,32 +67,3 @@ def calculate_score(file_path):
     except Exception as e:
         print(f"Error calling Gemini API: {e}")
         return None # Indicate API call error
-
-def provide_review(file_path):
-    """
-    Extracts text from the uploaded PDF and calls the Gemini API to provide a review.
-    Returns the review as a string or None if there's an error.
-    """
-    # Step 1: Extract text from PDF using PyPDF2 (same as before - good part!)
-    try:
-        with open(file_path, 'rb') as f:
-            pdf_reader = PyPDF2.PdfReader(f)
-            text = ""
-            for page in pdf_reader.pages:
-                page_text = page.extract_text()
-                if page_text:
-                    text += page_text
-    except Exception as e:
-        print(f"Error extracting text from PDF: {e}")
-        return None  # Return None to indicate failure
-
-    if not text: # Check if text extraction actually resulted in text
-        print("No text extracted from PDF.")
-        return None
-
-    # Step 2: Get the Gemini API key and Configure Gemini API
-    gemini_api_key = os.environ.get('GEMINI_API_KEY')
-    if not gemini_api_key:
-        print("Gemini API key not set in environment variables (GEMINI_API_KEY).")
-        return None
-    
