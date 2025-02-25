@@ -16,8 +16,10 @@ google-generativeai==0.8.4
 googleapis-common-protos==1.68.0
 grpcio==1.70.0
 grpcio-status==1.70.0
+gunicorn==23.0.0
 httplib2==0.22.0
 idna==3.10
+packaging==24.2
 proto-plus==1.26.0
 protobuf==5.29.3
 pyasn1==0.6.1

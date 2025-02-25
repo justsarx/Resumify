@@ -67,3 +67,59 @@ def calculate_score(file_path):
     except Exception as e:
         print(f"Error calling Gemini API: {e}")
         return None # Indicate API call error
+
+def calculate_review(file_path):
+    """
+    Extracts text from the uploaded PDF and calls the Gemini API to provide a basic resume review,
+    assess ATS friendliness, and suggest improvements.
+    Returns a dictionary containing the review, ATS friendliness assessment, and improvement suggestions,
+    or None if there's an error.  Score is omitted in this function.
+    """
+    # Step 1: Extract text from PDF using PyPDF2 (same as before)
+    try:
+        with open(file_path, 'rb') as f:
+            pdf_reader = PyPDF2.PdfReader(f)
+            text = ""
+            for page in pdf_reader.pages:
+                page_text = page.extract_text()
+                if page_text:
+                    text += page_text
+    except Exception as e:
+        print(f"Error extracting text from PDF: {e}")
+        return None  # Return None to indicate failure
+
+    if not text: # Check if text extraction actually resulted in text
+        print("No text extracted from PDF.")
+        return None
+
+    # Step 2: Get the Gemini API key and Configure Gemini API
+    gemini_api_key = os.environ.get('GEMINI_API_KEY')
+    if not gemini_api_key:
+        print("Gemini API key not set in environment variables (GEMINI_API_KEY).")
+        return None
+
+    genai.configure(api_key=gemini_api_key) # Configure Gemini API with the key
+    model = genai.GenerativeModel('gemini-pro') # Use 'gemini-pro' model
+
+
+    # Step 3: Prepare the PROMPT for Gemini API - Modified to request ONLY review and suggestions (NO SCORE)
+    prompt_text = f"""
+    Evaluate the following resume text and provide a review of the content,
+    focusing on ATS friendliness, clarity, and relevance to typical job requirements.
+    Your response should be constructive and provide suggestions for improvement.
+    The response will be only simple plaintext. No bullet points or complex formatting needed.
+    Response length limit is 100 words.
+    
+    Resume Text:
+    {text}
+    """
+
+    # Step 4: Call the Gemini API using the google-generativeai library
+    try:
+        response = model.generate_content(prompt_text)
+        full_response_text = response.text.strip()
+        return full_response_text
+        
+    except Exception as e:
+        print(f"Error calling Gemini API: {e}")
+        return None # Indicate API call error

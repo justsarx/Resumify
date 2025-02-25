@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node,python
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,python
+# Created by https://www.toptal.com/developers/gitignore/api/node,python,react
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,python,react
 
 ### Node ###
 # Logs
@@ -310,4 +310,17 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
-# End of https://www.toptal.com/developers/gitignore/api/node,python
+### react ###
+.DS_*
+**/*.backup.*
+**/*.back.*
+
+node_modules
+
+*.sublime*
+
+psd
+thumb
+sketch
+
+# End of https://www.toptal.com/developers/gitignore/api/node,python,react

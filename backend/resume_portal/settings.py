@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-v-u#hzzvy^m832syb6+4essk09*chhwnu%3%!)dczxwz5fcug6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -55,9 +55,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'resume_portal.urls'
 
