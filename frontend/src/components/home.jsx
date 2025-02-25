@@ -5,6 +5,12 @@ import {
   FingerPrintIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
+import TextPressure from "../TextAnimations/TextPressure/TextPressure";
+import BlurText from "../TextAnimations/BlurText/BlurText";
+import TrueFocus from "../TextAnimations/TrueFocus/TrueFocus";
+import { AntDesignOutlined } from "@ant-design/icons";
+import { Button, ConfigProvider, Space } from "antd";
+import { createStyles } from "antd-style";
 import Header from "./Header";
 const features = [
   {
@@ -27,18 +33,43 @@ const features = [
   },
   {
     name: "Personalized Improvement Tips",
-    description:
-      "Get actionable suggestions tailored to your unique profile.",
+    description: "Get actionable suggestions tailored to your unique profile.",
     icon: FingerPrintIcon,
   },
 ];
 
+const useStyle = createStyles(({ prefixCls, css }) => ({
+  linearGradientButton: css`
+    &.${prefixCls}-btn-primary:not([disabled]):not(
+        .${prefixCls}-btn-dangerous
+      ) {
+      > span {
+        position: relative;
+      }
+
+      &::before {
+        content: "";
+        background: linear-gradient(135deg, #6253e1, #04befe);
+        position: absolute;
+        inset: -1px;
+        opacity: 1;
+        transition: all 0.3s;
+        border-radius: inherit;
+      }
+
+      &:hover::before {
+        opacity: 0;
+      }
+    }
+  `,
+}));
 export default function Home() {
+  const { styles } = useStyle();
   return (
     <div className="bg-white">
       <Header />
 
-      <div className="relative isolate px-6 pt-14 lg:px-8">
+      <div className="relative isolate px-6 lg:px-8">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -55,17 +86,45 @@ export default function Home() {
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
           <div className="text-center">
             <h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">
-              ResumiFy
+              <TextPressure
+                text="ResumiFy"
+                flex={true}
+                alpha={false}
+                stroke={false}
+                width={true}
+                weight={true}
+                italic={true}
+                textColor="#000000"
+                strokeColor="#ff0000"
+                minFontSize={36}
+              />
             </h1>
             <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
-              A portal to help you create a resume that stands out.
+              <BlurText
+                text="A portal to help you create a resume that stands out."
+                delay={100}
+                animateBy="words"
+                direction="top"
+                className="text-2xl mb-8"
+              />
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="/upload"
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Get started
+              <a href="/upload">
+                <ConfigProvider
+                  button={{
+                    className: styles.linearGradientButton,
+                  }}
+                >
+                  <Space>
+                    <Button
+                      type="primary"
+                      size="large"
+                      icon={<AntDesignOutlined />}
+                    >
+                      Get Started
+                    </Button>
+                  </Space>
+                </ConfigProvider>
               </a>
             </div>
           </div>
@@ -88,10 +147,18 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
             <h2 className="text-base/7 font-semibold text-indigo-600">
-            Stand Out. Get Hired.
+              <TrueFocus
+                sentence="Stand Out. Get Hired."
+                manualMode={false}
+                blurAmount={3}
+                borderColor="blue"
+                animationDuration={1}
+                pauseBetweenAnimations={0.2}
+              />
             </h2>
+            <br />
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance">
-                Transform Your Resume with AI-Driven Insights.
+              Transform Your Resume with AI-Driven Insights.
             </p>
             <p className="mt-6 text-lg/8 text-gray-600">
               Boost your job prospects with data-driven resume enhancements.

@@ -35,7 +35,7 @@ export default function Modal({ score, review, onClose }) {
                 onClick={onClose}
                 className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500 focus:outline-none"
               >
-                <Link to="/ranks" >Check your rank.
+                <Link to="/ranks" >Check your rank
                 </Link>
                 
               </button>

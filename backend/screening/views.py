@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+import os
 # Create your views here.
 from rest_framework import viewsets, status
 from rest_framework.response import Response
@@ -23,6 +23,7 @@ class ResumeViewSet(viewsets.ModelViewSet):
         resume_instance.score = score
         resume_instance.review = review
         resume_instance.save()
+        os.remove(resume_instance.resume_file.path)
         
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

@@ -6,7 +6,7 @@ import axios from "axios";
 
 const Ranks = () => {
   const [resumes, setResumes] = useState([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,15 +14,17 @@ const Ranks = () => {
 
     const fetchResumes = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/resumes/', {
+        const response = await axios.get("http://localhost:8000/api/resumes/", {
           cancelToken: source.token,
         });
         // Sort data in descending order by score
-        const sortedResumes = [...response.data].sort((a, b) => b.score - a.score);
+        const sortedResumes = [...response.data].sort(
+          (a, b) => b.score - a.score
+        );
         setResumes(sortedResumes);
       } catch (err) {
         if (!axios.isCancel(err)) {
-          setError('Error fetching resumes.');
+          setError("Error fetching resumes.");
           console.error(err);
         }
       } finally {
@@ -71,7 +73,17 @@ const Ranks = () => {
                 <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
                   <p className="text-sm text-gray-900">{resume.score}</p>
                   <div className="mt-1 flex items-center gap-x-1.5">
-                    <p className="text-xs text-gray-500">Score</p>
+                    <p className="text-xs text-gray-500">
+                      {new Date(resume.upload_date)
+                        .toLocaleDateString("en-GB")
+                        .replace(/\//g, "-")}
+                      {" | "}
+                      {new Date(resume.upload_date).toLocaleTimeString(
+                        "en-GB",
+                        { hour: "2-digit", minute: "2-digit" }
+                      )}
+                    </p>
+                    <p></p>
                   </div>
                 </div>
               </li>

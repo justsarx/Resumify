@@ -1,9 +1,10 @@
 "use client";
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import Header from "./Header";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Alert } from 'antd';
 import axios from "axios";
+import Header from "./Header";
 import Modal from "./Modal";
 
 const ResumeUpload = () => {
@@ -92,6 +93,13 @@ const ResumeUpload = () => {
                 </div>
 
                 <div className="col-span-full">
+                  <Alert
+                    message="Security & Privacy"
+                    description="The content uploaded here is processed and deleted immediately. We do not store any data."
+                    type="info"
+                    closable
+                  />
+                  <br />
                   <label
                     htmlFor="cover-photo"
                     className="block text-sm/6 font-medium text-gray-900"
@@ -196,6 +204,7 @@ const ResumeUpload = () => {
             />
           )}
         </form>
+        <br />
       </div>
     </div>
   );

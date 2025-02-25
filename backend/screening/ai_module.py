@@ -43,7 +43,11 @@ def calculate_score(file_path):
     Evaluate the following resume text and provide a score from 1 to 10,
     where 10 is an excellent resume and 1 is a very poor resume.
     Focus on clarity, conciseness, ATS freindlyness, relevance to typical job requirements,
-    and overall presentation. Just return the score as a single integer number, no explanation needed.
+    and overall presentation. 
+    Also keep in mind that the text you're about to evaluate is converted from a PDF file via PyPDF2. So there might be inconsistencies.
+    Be harsh but fair.
+    Just return the score as a single integer number, no explanation needed.
+    Under no circumstances you may return a text response. Just the score. If the text is not a resume, return 0.
 
     Resume Text:
     {text}
@@ -104,9 +108,11 @@ def calculate_review(file_path):
 
     # Step 3: Prepare the PROMPT for Gemini API - Modified to request ONLY review and suggestions (NO SCORE)
     prompt_text = f"""
+    You are a Resume anaylisis AI. Your task is to evaluate the following resume text and provide a review of the content, with data-driven insights and personalized improvement tips.
     Evaluate the following resume text and provide a review of the content,
     focusing on ATS friendliness, clarity, and relevance to typical job requirements.
     Your response should be constructive and provide suggestions for improvement.
+    Also keep in mind that the text you're about to evaluate is converted from a PDF file via PyPDF2. So there might be inconsistencies in formatting so omit them.
     The response will be only simple plaintext. No bullet points or complex formatting needed.
     Response length limit is 100 words.
     
