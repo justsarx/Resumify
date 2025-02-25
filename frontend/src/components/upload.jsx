@@ -7,6 +7,7 @@ import axios from "axios";
 import Header from "./Header";
 import Modal from "./Modal";
 
+const backendUrl = import.meta.env.VITE_API_URL;
 const ResumeUpload = () => {
   const [file, setFile] = useState(null);
   const [candidateName, setCandidateName] = useState("");
@@ -37,7 +38,7 @@ const ResumeUpload = () => {
     setIsUploading(true);
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/resumes/",
+        `${backendUrl}/api/resumes/`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

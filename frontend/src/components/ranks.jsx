@@ -4,6 +4,7 @@ import Header from "./Header";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_API_URL;
 const Ranks = () => {
   const [resumes, setResumes] = useState([]);
   const [error, setError] = useState("");
@@ -14,7 +15,7 @@ const Ranks = () => {
 
     const fetchResumes = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/resumes/", {
+        const response = await axios.get(`${backendUrl}/api/resumes/`, {
           cancelToken: source.token,
         });
         // Sort data in descending order by score
