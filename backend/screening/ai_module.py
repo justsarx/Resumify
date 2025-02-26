@@ -103,7 +103,7 @@ def calculate_review(file_path):
         return None
 
     genai.configure(api_key=gemini_api_key) # Configure Gemini API with the key
-    model = genai.GenerativeModel('gemini-pro') # Use 'gemini-pro' model
+    model = genai.GenerativeModel('gemini-2.0-flash') # Use 'gemini-pro' model
 
 
     # Step 3: Prepare the PROMPT for Gemini API - Modified to request ONLY review and suggestions (NO SCORE)

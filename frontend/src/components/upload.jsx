@@ -8,7 +8,6 @@ import Header from "./Header";
 import Modal from "./Modal";
 
 const backendUrl = import.meta.env.VITE_API_URL;
-console.log(backendUrl);
 const ResumeUpload = () => {
   const [file, setFile] = useState(null);
   const [candidateName, setCandidateName] = useState("");
