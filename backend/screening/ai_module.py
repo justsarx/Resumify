@@ -9,32 +9,31 @@ gemini_api_key = os.environ.get('GEMINI_API_KEY')
 if not gemini_api_key:
     print("Gemini API key not set in environment variables (GEMINI_API_KEY).")
 else:
-    genai.configure(api_key=gemini_api_key) # Configure Gemini API once if key is available
-    model = genai.GenerativeModel('gemini-2.0-flash') # Define model once
+    genai.configure(api_key=gemini_api_key)  # Configure Gemini API once if key is available
+    model = genai.GenerativeModel('gemini-2.0-flash')  # Define model once
 
 
 def analyze_resume(file_path, analysis_type="both"):
     """
-    Analyzes a resume from a PDF file, providing a score, review, or both using the Gemini API.
-
+    Analyzes a resume from a PDF file using the Gemini API.
+    
     Args:
-        file_path (str): The path to the PDF resume file.
-        analysis_type (str, optional):  Type of analysis to perform.
+        file_path (str): Path to the PDF resume file.
+        analysis_type (str, optional): Type of analysis to perform:
             "score":  Returns only a numerical score (1-10).
-            "review": Returns a text-based review with improvement suggestions.
+            "review": Returns only a text review with improvement suggestions.
             "both":   Returns both score and review (default).
-            Defaults to "both".
-
+    
     Returns:
-        dict or int or str or None:  Returns different output based on analysis_type:
-            - If "score": returns an integer score (1-10) or None on error.
-            - If "review": returns a string with the review or None on error.
-            - If "both": returns a dictionary with 'score' and 'review' keys, or None on error.
-            - None: if there's a general error in processing.
+        dict or int or str or None: Output depends on analysis_type:
+            - "score": integer score (1-10) or None on error.
+            - "review": string review or None on error.
+            - "both": dictionary with 'score' and 'review', or None on error.
+            - None: on a general processing error.
     """
-
+    
     if not gemini_api_key:
-        return None  # Return None if API key is missing (early exit after initial check in global scope)
+        return None  # Exit early if API key is missing
 
     # Step 1: Extract text from PDF
     try:
@@ -53,80 +52,70 @@ def analyze_resume(file_path, analysis_type="both"):
         print("No text extracted from PDF.")
         return None
 
-    # Step 2 & 3: Prepare prompts and call Gemini API based on analysis_type
-    results = {} # Dictionary to store results if analysis_type is 'both'
+    results = {}  # Dictionary to store results
 
     if analysis_type in ("score", "both"):
+        # Improved scoring prompt
         score_prompt = f"""
-        Evaluate the following resume text and provide a score from 1 to 10,
-        where 10 is an excellent resume and 1 is a very poor resume.
-        Focus on clarity, conciseness, ATS freindlyness, relevance to typical job requirements,
-        and overall presentation.
-        Also keep in mind that the text you're about to evaluate is converted from a PDF file via PyPDF2. So there might be inconsistencies.
-        Be harsh but fair.
-        Just return the score as a single integer number, no explanation needed.
-        Under no circumstances you may return a text response. Just the score. If the text is not a resume, return 0.
-
-        Resume Text:
-        {text}
+You are an expert resume evaluator. Analyze the resume text below and return a single integer rating between 1 and 10. 
+Focus on clarity, conciseness, ATS compatibility, relevance, and overall presentation. 
+Ignore any formatting issues due to PDF conversion. 
+If the text does not represent a resume, return 0.
+Resume Text:
+{text}
         """
         try:
             response = model.generate_content(score_prompt)
             score_text = response.text.strip()
             try:
                 score = int(score_text)
-                if not (0 <= score <= 10): # Allow 0 in case it's not a resume
+                if not (0 <= score <= 10):
                     print(f"Gemini returned score out of range: {score}")
-                    results['score'] = None # Indicate invalid score range in results dict
+                    results['score'] = None
                 else:
-                    results['score'] = score # Store score in results dict
+                    results['score'] = score
             except ValueError:
                 print(f"Gemini returned non-numeric score: {score_text}")
-                results['score'] = None # Indicate non-numeric score in results dict
-
+                results['score'] = None
         except Exception as e:
             print(f"Error calling Gemini API for scoring: {e}")
-            results['score'] = None # Indicate API call error in results dict
-
+            results['score'] = None
 
     if analysis_type in ("review", "both"):
+        # Improved review prompt
         review_prompt = f"""
-        You are a Resume analysis AI. Your task is to evaluate the following resume text and provide a review of the content, with data-driven insights and personalized improvement tips.
-        Evaluate the following resume text and provide a review of the content,
-        focusing on ATS friendliness, clarity, and relevance to typical job requirements.
-        Your response should be constructive and provide suggestions for improvement.
-        Also keep in mind that the text you're about to evaluate is converted from a PDF file via PyPDF2. So there might be inconsistencies in formatting so omit them.
-        The response will be only simple plaintext. No bullet points or complex formatting needed.
-        Response length limit is 100 words.
-
-        Resume Text:
-        {text}
+You are an expert resume reviewer. Evaluate the resume text below and provide a constructive review in plain text (no bullet points or formatting), limited to 100 words. 
+Focus on ATS compatibility, clarity, and relevance to common job requirements. 
+Offer data-driven insights and personalized improvement suggestions. 
+Disregard any formatting errors from PDF conversion.
+Resume Text:
+{text}
         """
         try:
             response = model.generate_content(review_prompt)
             review_text = response.text.strip()
-            results['review'] = review_text # Store review in results dict
+            results['review'] = review_text
         except Exception as e:
             print(f"Error calling Gemini API for review: {e}")
-            results['review'] = None # Indicate API call error in results dict
+            results['review'] = None
 
-    # Step 4: Return results based on analysis_type
+    # Return results based on analysis_type
     if analysis_type == "score":
-        return results.get('score') # Return just the score if requested
+        return results.get('score')
     elif analysis_type == "review":
-        return results.get('review') # Return just the review if requested
+        return results.get('review')
     elif analysis_type == "both":
-        if not results.get('score') and not results.get('review'): # Check for general error if both are requested
-            return None # Return None if both score and review failed
-        return results # Return the full results dictionary if both are requested
+        if results.get('score') is None and results.get('review') is None:
+            return None
+        return results
     else:
         print(f"Invalid analysis_type: {analysis_type}. Returning None.")
-        return None # Handle invalid analysis_type
+        return None
 
 
 if __name__ == '__main__':
-    # Example Usage (assuming you have a resume.pdf file and GEMINI_API_KEY in .env)
-    resume_file = 'resume.pdf'  # Replace with your resume file path
+    # Example usage (ensure you have a resume.pdf file and GEMINI_API_KEY in .env)
+    resume_file = 'resume.pdf'  # Update with your resume file path
 
     if os.path.exists(resume_file):
         print(f"Analyzing resume: {resume_file}")
@@ -138,7 +127,7 @@ if __name__ == '__main__':
         else:
             print("Could not calculate resume score.")
 
-        print("-" * 30) # Separator for clarity
+        print("-" * 30)
 
         # Get Review
         review_result = analyze_resume(resume_file, analysis_type="review")
@@ -148,7 +137,7 @@ if __name__ == '__main__':
         else:
             print("Could not generate resume review.")
 
-        print("-" * 30) # Separator for clarity
+        print("-" * 30)
 
         # Get Both Score and Review
         both_results = analyze_resume(resume_file, analysis_type="both")
@@ -164,6 +153,5 @@ if __name__ == '__main__':
                 print("Could not generate combined resume review.")
         else:
             print("Could not perform combined score and review.")
-
     else:
-        print(f"Error: {resume_file} not found. Please place a resume.pdf file in the same directory or update the file path.")
+        print(f"Error: {resume_file} not found. Please update the file path or place a resume.pdf file in the directory.")
