@@ -61,6 +61,7 @@ You are an expert resume evaluator. Analyze the resume text below and return a s
 Focus on clarity, conciseness, ATS compatibility, relevance, and overall presentation. 
 Ignore any formatting issues due to PDF conversion. 
 If the text does not represent a resume, return 0.
+Under no circumstances should you provide anything except a single integer in response.
 Resume Text:
 {text}
         """
