@@ -1,10 +1,12 @@
 "use client";
 
-import Header from "./Header";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import axios from "axios";
 
+const Header = lazy(() => import("./Header"));
+
 const backendUrl = import.meta.env.VITE_API_URL;
+
 const Ranks = () => {
   const [resumes, setResumes] = useState([]);
   const [error, setError] = useState("");
@@ -42,7 +44,9 @@ const Ranks = () => {
 
   return (
     <div className="bg-white">
-      <Header />
+      <Suspense fallback={<div className="p-4 text-center">Loading header...</div>}>
+        <Header />
+      </Suspense>
 
       <div className="relative isolate px-6 pt-24 lg:px-120">
         {loading ? (
@@ -60,7 +64,7 @@ const Ranks = () => {
                   <img
                     alt="Candidate"
                     src="https://img.icons8.com/3d-fluency/94/user-shield.png"
-                    className="size-12 flex-none rounded-full bg-gray-50"
+                    className="h-12 w-12 flex-none rounded-full bg-gray-50"
                   />
                   <div className="min-w-0 flex-auto">
                     <p className="text-sm font-semibold text-gray-900">
@@ -79,12 +83,11 @@ const Ranks = () => {
                         .toLocaleDateString("en-GB")
                         .replace(/\//g, "-")}
                       {" | "}
-                      {new Date(resume.upload_date).toLocaleTimeString(
-                        "en-GB",
-                        { hour: "2-digit", minute: "2-digit" }
-                      )}
+                      {new Date(resume.upload_date).toLocaleTimeString("en-GB", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
                     </p>
-                    <p></p>
                   </div>
                 </div>
               </li>
