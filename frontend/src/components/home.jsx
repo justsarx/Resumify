@@ -26,26 +26,26 @@ const features = [
   {
     name: "Instant Resume Analysis",
     description:
-      "Upload your resume and receive real-time feedback powered by AI.",
+      "Upload your resume and receive real-time feedback powered by AI. Get detailed scores, reviews, and personalized improvement tips.",
     icon: CloudArrowUpIcon,
+  },
+  {
+    name: "Smart Job Matching",
+    description:
+      "Our AI-powered system automatically matches your resume with relevant job postings based on skills and experience.",
+    icon: FingerPrintIcon,
+  },
+  {
+    name: "Recruitment Platform",
+    description:
+      "Post jobs, find perfect candidates, and manage your hiring process all in one place. Get detailed candidate insights and matching scores.",
+    icon: ArrowPathIcon,
   },
   {
     name: "Secure and Private",
     description:
-      "Your data is safe with us. We do not store any personal information.",
+      "Your data is safe with us. We use industry-standard security measures to protect your information.",
     icon: LockClosedIcon,
-  },
-  {
-    name: "Data-Driven Insights",
-    description:
-      "Discover your resume’s strengths and pinpoint areas for improvement using advanced analytics.",
-    icon: ArrowPathIcon,
-  },
-  {
-    name: "Personalized Improvement Tips",
-    description:
-      "Get actionable suggestions tailored to your unique profile.",
-    icon: FingerPrintIcon,
   },
 ];
 
@@ -116,7 +116,7 @@ export default function Home() {
             <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
               <Suspense fallback={<span>Loading text...</span>}>
                 <BlurText
-                  text="A portal to help you create a resume that stands out."
+                  text="Your AI-powered recruitment and resume optimization platform."
                   delay={100}
                   animateBy="words"
                   direction="top"
@@ -137,7 +137,24 @@ export default function Home() {
                       size="large"
                       icon={<FileSearchOutlined />}
                     >
-                      Get Started
+                      Upload Resume
+                    </Button>
+                  </Space>
+                </ConfigProvider>
+              </a>
+              <a href="/jobpost">
+                <ConfigProvider
+                  button={{
+                    className: styles.linearGradientButton,
+                  }}
+                >
+                  <Space>
+                    <Button
+                      type="primary"
+                      size="large"
+                      icon={<ArrowPathIcon className="h-5 w-5" />}
+                    >
+                      Post a Job
                     </Button>
                   </Space>
                 </ConfigProvider>
@@ -177,10 +194,10 @@ export default function Home() {
             </h2>
             <br />
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance">
-              Transform Your Resume with AI-Driven Insights.
+              Transform Your Recruitment Process with AI
             </p>
             <p className="mt-6 text-lg/8 text-gray-600">
-              Boost your job prospects with data-driven resume enhancements.
+              Whether you're a job seeker looking to optimize your resume or an employer seeking the perfect candidate, ResumiFy's AI-powered platform helps you achieve your goals faster and more effectively.
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">

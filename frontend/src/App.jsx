@@ -5,13 +5,17 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
+import EditJobPost from "./components/EditJobPost";
 
 // Dynamically import pages
-const Home = lazy(() => import("./components/home"));
-const Upload = lazy(() => import("./components/upload"));
-const Ranks = lazy(() => import("./components/ranks"));
+const Home = lazy(() => import("./components/Home"));
+const Upload = lazy(() => import("./components/Upload"));
+const Ranks = lazy(() => import("./components/Ranks"));
+const JobPost = lazy(() => import("./components/JobPost")); // ✅ NEW
+const Register = lazy(() => import("./components/Register")); // ✅ NEW
+const Login = lazy(() => import("./components/Login")); // ✅ NEW
+const MyJobs = lazy(() => import("./components/MyJobs")); // ✅ NEW
 
-// Component to track route changes and trigger the loading bar
 function RouteChangeTracker() {
   const location = useLocation();
 
@@ -30,7 +34,6 @@ function RouteChangeTracker() {
   return null;
 }
 
-// A wrapper component to add transitions to each page
 function AnimatedPage({ children }) {
   return (
     <motion.div
@@ -44,7 +47,6 @@ function AnimatedPage({ children }) {
   );
 }
 
-// Add PropTypes for AnimatedPage to validate the children prop
 AnimatedPage.propTypes = {
   children: PropTypes.node.isRequired,
 };
@@ -81,6 +83,46 @@ function App() {
                 </AnimatedPage>
               }
             />
+            <Route
+              path="/jobpost"
+              element={
+                <AnimatedPage>
+                  <JobPost />
+                </AnimatedPage>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <AnimatedPage>
+                  <Login />
+                </AnimatedPage>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <AnimatedPage>
+                  <Register />
+                </AnimatedPage>
+              }
+            />
+            <Route
+              path="/myjobs"
+              element={
+                <AnimatedPage>
+                  <MyJobs />
+                </AnimatedPage>
+              }
+            />
+            <Route
+              path="/edit-job/:id"
+              element={
+                <AnimatedPage>
+                  <EditJobPost />
+                </AnimatedPage>
+              }
+            />
           </Routes>
         </AnimatePresence>
       </Suspense>
@@ -88,7 +130,6 @@ function App() {
   );
 }
 
-// Wrap the App with Router at a higher level
 export default function WrappedApp() {
   return (
     <Router>

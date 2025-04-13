@@ -1,5 +1,5 @@
 "use client";
-import { useState, lazy, Suspense } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 
 const MobileMenu = lazy(() => import("./MobileMenu"));
@@ -12,6 +12,18 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    window.location.href = "/"; // Or use a router to navigate
+  };
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
@@ -22,9 +34,14 @@ export default function Header() {
         <div className="flex lg:flex-1">
           <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Resumify</span>
-            <img alt="Resumify Logo" src="applicant.png" className="h-8 w-auto" />
+            <img
+              alt="Resumify Logo"
+              src="applicant.png"
+              className="h-8 w-auto"
+            />
           </a>
         </div>
+
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -35,7 +52,8 @@ export default function Header() {
             <Bars3Icon aria-hidden="true" className="h-6 w-6" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12">
+
+        <div className="hidden lg:flex lg:gap-x-12 items-center">
           {navigation.map((item) => (
             <a
               key={item.name}
@@ -45,13 +63,52 @@ export default function Header() {
               {item.name}
             </a>
           ))}
+          {isLoggedIn ? (
+            <>
+              <a
+                href="/jobPost"
+                className="ml-4 text-sm font-semibold text-indigo-600 hover:text-indigo-800"
+              >
+                Post Job
+              </a>
+              {/* Uncomment below to enable logout button */}
+              {isLoggedIn && (
+                <a
+                  href="/myjobs"
+                  className="text-sm font-semibold text-gray-900"
+                >
+                  My Jobs
+                </a>
+              )}
+
+              {
+                <button
+                  onClick={handleLogout}
+                  className="ml-4 text-sm font-semibold text-red-500 hover:text-red-700"
+                >
+                  Logout
+                </button>
+              }
+            </>
+          ) : (
+            <a
+              href="/login"
+              className="ml-4 text-sm font-semibold text-indigo-600 hover:text-indigo-800"
+            >
+              Login
+            </a>
+          )}
         </div>
       </nav>
 
-      {/* Lazy load the mobile menu */}
       {mobileMenuOpen && (
-        <Suspense fallback={<div className="p-6 text-center">Loading menu...</div>}>
-          <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+        <Suspense
+          fallback={<div className="p-6 text-center">Loading menu...</div>}
+        >
+          <MobileMenu
+            isOpen={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+          />
         </Suspense>
       )}
     </header>

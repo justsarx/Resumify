@@ -1,5 +1,6 @@
 "use client";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -10,6 +11,13 @@ const navigation = [
 ];
 
 export default function MobileMenu({ isOpen, onClose }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
   return (
     <Dialog open={isOpen} onClose={onClose} className="lg:hidden">
       <div className="fixed inset-0 z-50" />
@@ -28,6 +36,7 @@ export default function MobileMenu({ isOpen, onClose }) {
             <XMarkIcon aria-hidden="true" className="h-6 w-6" />
           </button>
         </div>
+
         <div className="mt-6 flow-root">
           <div className="-my-6 divide-y divide-gray-500/10">
             <div className="space-y-2 py-6">
@@ -40,6 +49,21 @@ export default function MobileMenu({ isOpen, onClose }) {
                   {item.name}
                 </a>
               ))}
+              {isLoggedIn ? (
+                <a
+                  href="/job-post"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-indigo-600 hover:bg-gray-50"
+                >
+                  Post Job
+                </a>
+              ) : (
+                <a
+                  href="/login"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-indigo-600 hover:bg-gray-50"
+                >
+                  Login
+                </a>
+              )}
             </div>
           </div>
         </div>
