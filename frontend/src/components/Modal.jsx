@@ -9,7 +9,7 @@ import {
 } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-import JobRecommendations from "./JobRecommendations";
+import JobRecommendations from "./jobrecommendations";
 
 export default function Modal({ score, review, relevanceScore, relevanceTips, resumeId, onClose }) {
   return (

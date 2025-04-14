@@ -6,8 +6,8 @@ import { Alert } from "antd";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 
-const Header = lazy(() => import("./Header"));
-const Modal = lazy(() => import("./Modal"));
+const Header = lazy(() => import("./header"));
+const Modal = lazy(() => import("./modal"));
 
 const backendUrl = import.meta.env.VITE_API_URL;
 

@@ -4,7 +4,7 @@ import { useState, Suspense } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Alert } from "antd";
 import axios from "axios";
-import Header from "./Header";
+import Header from "./header";
 
 const Login = () => {
   const navigate = useNavigate();

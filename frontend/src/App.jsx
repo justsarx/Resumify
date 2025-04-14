@@ -5,16 +5,16 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
-import EditJobPost from "./components/EditJobPost";
+import EditJobPost from "./components/editjobpost";
 
 // Dynamically import pages
-const Home = lazy(() => import("./components/Home"));
-const Upload = lazy(() => import("./components/Upload"));
-const Ranks = lazy(() => import("./components/Ranks"));
-const JobPost = lazy(() => import("./components/JobPost")); // ✅ NEW
-const Register = lazy(() => import("./components/Register")); // ✅ NEW
-const Login = lazy(() => import("./components/Login")); // ✅ NEW
-const MyJobs = lazy(() => import("./components/MyJobs")); // ✅ NEW
+const Home = lazy(() => import("./components/home"));
+const Upload = lazy(() => import("./components/upload"));
+const Ranks = lazy(() => import("./components/ranks"));
+const JobPost = lazy(() => import("./components/jobpost")); // ✅ NEW
+const Register = lazy(() => import("./components/register")); // ✅ NEW
+const Login = lazy(() => import("./components/login")); // ✅ NEW
+const MyJobs = lazy(() => import("./components/myjobs")); // ✅ NEW
 
 function RouteChangeTracker() {
   const location = useLocation();

@@ -5,9 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { Alert } from "antd";
 import axios from "axios";
-import CandidateMatches from "./CandidateMatches";
+import CandidateMatches from "./candidatematches";
 
-const Header = lazy(() => import("./Header"));
+const Header = lazy(() => import("./header"));
 
 const backendUrl = import.meta.env.VITE_API_URL;
 
