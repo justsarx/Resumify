@@ -10,17 +10,27 @@ import { FileSearchOutlined } from "@ant-design/icons";
 import { Button, ConfigProvider, Space } from "antd";
 import { createStyles } from "antd-style";
 
-// Dynamically import animation and header components
+// Dynamically import animation and header components with error handling
 const TextPressure = lazy(() =>
-  import("../TextAnimations/TextPressure/TextPressure")
+  import("../TextAnimations/TextPressure/TextPressure").catch(() => ({
+    default: () => <span>ResumiFy</span>
+  }))
 );
 const BlurText = lazy(() =>
-  import("../TextAnimations/BlurText/BlurText")
+  import("../TextAnimations/BlurText/BlurText").catch(() => ({
+    default: ({ text }) => <span>{text}</span>
+  }))
 );
 const TrueFocus = lazy(() =>
-  import("../TextAnimations/TrueFocus/TrueFocus")
+  import("../TextAnimations/TrueFocus/TrueFocus").catch(() => ({
+    default: ({ sentence }) => <span>{sentence}</span>
+  }))
 );
-const Header = lazy(() => import("./Header"));
+const Header = lazy(() => 
+  import("./Header").catch(() => ({
+    default: () => null
+  }))
+);
 
 const features = [
   {
@@ -197,7 +207,7 @@ export default function Home() {
               Transform Your Recruitment Process with AI
             </p>
             <p className="mt-6 text-lg/8 text-gray-600">
-              Whether you're a job seeker looking to optimize your resume or an employer seeking the perfect candidate, ResumiFy's AI-powered platform helps you achieve your goals faster and more effectively.
+              Whether you&apos;re a job seeker looking to optimize your resume or an employer seeking the perfect candidate, ResumiFy&apos;s AI-powered platform helps you achieve your goals faster and more effectively.
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
