@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -12,11 +13,19 @@ const navigation = [
 
 export default function MobileMenu({ isOpen, onClose }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    onClose();
+    navigate("/");
+  };
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="lg:hidden">
@@ -25,7 +34,7 @@ export default function MobileMenu({ isOpen, onClose }) {
         <div className="flex items-center justify-between">
           <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Resumify</span>
-            <img alt="Resumify Logo" src="applicant.png" className="h-8 w-auto" />
+            <img alt="Resumify Logo" src="/applicant.png" className="h-8 w-auto" />
           </a>
           <button
             type="button"
@@ -45,21 +54,39 @@ export default function MobileMenu({ isOpen, onClose }) {
                   key={item.name}
                   href={item.href}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
+                  onClick={onClose}
                 >
                   {item.name}
                 </a>
               ))}
               {isLoggedIn ? (
-                <a
-                  href="/job-post"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-indigo-600 hover:bg-gray-50"
-                >
-                  Post Job
-                </a>
+                <>
+                  <a
+                    href="/jobpost"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-indigo-600 hover:bg-gray-50"
+                    onClick={onClose}
+                  >
+                    Post Job
+                  </a>
+                  <a
+                    href="/myjobs"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
+                    onClick={onClose}
+                  >
+                    My Jobs
+                  </a>
+                  <button
+                    onClick={handleLogout}
+                    className="-mx-3 block w-full rounded-lg px-3 py-2 text-base font-semibold text-red-500 hover:bg-gray-50 text-left"
+                  >
+                    Logout
+                  </button>
+                </>
               ) : (
                 <a
                   href="/login"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-indigo-600 hover:bg-gray-50"
+                  onClick={onClose}
                 >
                   Login
                 </a>

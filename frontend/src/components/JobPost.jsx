@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { Alert } from "antd";
 import axios from "axios";
-import CandidateMatches from "./candidatematches";
 
 const Header = lazy(() => import("./header"));
 
@@ -22,7 +21,6 @@ const JobPost = () => {
 
   const [status, setStatus] = useState("");
   const [isPosting, setIsPosting] = useState(false);
-  const [jobId, setJobId] = useState(null);
   const [validationErrors, setValidationErrors] = useState({});
   const navigate = useNavigate();
 
@@ -138,25 +136,16 @@ const JobPost = () => {
 
     try {
       setIsPosting(true);
-      const response = await axios.post(`${backendUrl}/api/jobs/`, jobData, {
+      await axios.post(`${backendUrl}/api/jobs/`, jobData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Token ${localStorage.getItem("token")}`,
         },
       });
 
-      setJobId(response.data.id);
-      setStatus("Job posted successfully!");
+      // Navigate to myjobs page after successful posting
+      navigate("/myjobs");
       
-      // Reset form fields
-      setTitle("");
-      setCompany("");
-      setLocation("");
-      setJobType("Full-time");
-      setDescription("");
-      setSkills("");
-      setSalary("");
-      setValidationErrors({});
     } catch (error) {
       let errorMessage = "Failed to post job.";
       if (error.response?.data) {
@@ -389,12 +378,6 @@ const JobPost = () => {
             </button>
           </div>
         </form>
-
-        {jobId && (
-          <div className="mt-12">
-            <CandidateMatches jobId={jobId} />
-          </div>
-        )}
       </div>
     </div>
   );

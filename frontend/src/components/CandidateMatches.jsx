@@ -104,7 +104,7 @@ const CandidateMatches = ({ jobId }) => {
               <div className="flex-grow">
                 <span className="text-sm font-medium text-gray-900">Matching Skills:</span>
                 <div className="mt-1 flex flex-wrap gap-2">
-                  {candidate.matching_keywords.map((keyword, index) => (
+                  {candidate.matching_keywords?.map((keyword, index) => (
                     <Tag key={index} color="green" className="text-sm">
                       {keyword}
                     </Tag>
@@ -132,7 +132,7 @@ const CandidateMatches = ({ jobId }) => {
 };
 
 CandidateMatches.propTypes = {
-  jobId: PropTypes.string.isRequired
+  jobId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 };
 
 export default CandidateMatches; 

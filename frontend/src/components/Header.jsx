@@ -36,7 +36,7 @@ export default function Header() {
             <span className="sr-only">Resumify</span>
             <img
               alt="Resumify Logo"
-              src="applicant.png"
+              src="/applicant.png"
               className="h-8 w-auto"
             />
           </a>
