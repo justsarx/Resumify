@@ -12,22 +12,22 @@ import { createStyles } from "antd-style";
 
 // Dynamically import animation and header components with error handling
 const TextPressure = lazy(() =>
-  import("../TextAnimations/TextPressure/TextPressure").catch(() => ({
+  import("../TextAnimations/TextPressure/TextPressure.jsx").catch(() => ({
     default: () => <span>ResumiFy</span>
   }))
 );
 const BlurText = lazy(() =>
-  import("../TextAnimations/BlurText/BlurText").catch(() => ({
+  import("../TextAnimations/BlurText/BlurText.jsx").catch(() => ({
     default: ({ text }) => <span>{text}</span>
   }))
 );
 const TrueFocus = lazy(() =>
-  import("../TextAnimations/TrueFocus/TrueFocus").catch(() => ({
+  import("../TextAnimations/TrueFocus/TrueFocus.jsx").catch(() => ({
     default: ({ sentence }) => <span>{sentence}</span>
   }))
 );
 const Header = lazy(() => 
-  import("./Header").catch(() => ({
+  import("./Header.jsx").catch(() => ({
     default: () => null
   }))
 );
