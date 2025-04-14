@@ -1,4 +1,4 @@
-# [ResumiFy: AI-Powered Resume Screening and Ranking Portal 🚀](https://resumify.up.railway.app/)
+# [ResumiFy: AI-Powered Resume Screening and Candidate Matching Platform 🚀](https://resumify.up.railway.app/)
 
 [![Project Status](https://img.shields.io/badge/Status-In%20Development-orange?style=for-the-badge)](https://github.com/your-github-username/your-repo-name)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -11,46 +11,66 @@
 ![ResumiFy Demo](./frontend/public/Resumify.gif)  
 
 ## ✨ Overview
-**ResumiFy** is an AI-powered web portal designed to streamline the resume screening process. Developed as a final year degree project, ResumiFy allows users to upload resume PDFs and receive instant AI-driven feedback, including:
-- Resume score (1-10)
-- Detailed review of strengths and weaknesses
-- ATS (Applicant Tracking System) friendliness assessment
-- Actionable improvement suggestions
+**ResumiFy** is an AI-powered web platform that revolutionizes the recruitment process through two key functionalities:
 
-This project leverages the **Google Gemini API** for intelligent resume evaluation and is built with a modern tech stack to provide a responsive and efficient user experience.
+1. **Resume Screening & Analysis**: Provides instant AI-driven feedback on resumes, including:
+   - Resume score (1-10)
+   - Detailed review of strengths and weaknesses
+   - ATS (Applicant Tracking System) friendliness assessment
+   - Actionable improvement suggestions
+
+2. **Smart Candidate Matching**: Enables recruiters to find the perfect candidates by:
+   - AI-powered job-candidate matching
+   - Advanced filtering and search capabilities
+   - Candidate profile management
+   - Direct communication channels
+
+This project leverages the **Google Gemini API** for intelligent resume evaluation and candidate matching, built with a modern tech stack to provide a responsive and efficient user experience.
 
 ---
 
 ## 🌟 Key Features
-- **Resume Upload** – Users can upload resumes in PDF format through an intuitive interface.
-- **AI-Powered Analysis** – Uses Google Gemini API for comprehensive resume evaluation.
-- **Scoring System** – Assigns an overall resume quality score (1-10).
-- **Detailed Review** – Highlights strengths and weaknesses with actionable feedback.
-- **ATS Friendliness Check** – Ensures resume compatibility with Applicant Tracking Systems.
-- **Improvement Suggestions** – Provides 2-3 practical recommendations to enhance the resume.
-- **Result Display** – Analysis results are presented in a clean, organized modal/popup.
-- **Server Status Indicator** – Displays real-time backend server availability.
-- **Responsive Design** – Ensures seamless user experience across devices.
+
+### For Job Seekers:
+- **Resume Upload & Analysis** – Upload resumes in PDF format and receive comprehensive AI feedback
+- **Resume Scoring** – Get an overall quality score (1-10) with detailed breakdown
+- **ATS Compatibility Check** – Ensure your resume passes automated screening systems
+- **Improvement Suggestions** – Receive actionable recommendations to enhance your resume
+- **Profile Management** – Create and maintain a professional profile for recruiters
+- **Job Matching** – Get matched with relevant job opportunities based on your profile
+
+### For Recruiters:
+- **Smart Candidate Search** – Find candidates using AI-powered matching algorithms
+- **Advanced Filtering** – Filter candidates by skills, experience, education, and more
+- **Resume Analysis** – Get AI-generated insights about candidate resumes
+- **Candidate Management** – Save and organize potential candidates
+- **Direct Communication** – Connect with candidates through the platform
+- **Job Posting** – Create and manage job listings with detailed requirements
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### **Frontend:**
-- [**React.js**](https://reactjs.org/) – Interactive and dynamic user interface.
-- [**Node.js**](https://nodejs.org/) – JavaScript runtime environment.
-- [**Axios**](https://axios-http.com/) – HTTP requests to the backend API.
-- [**Vite**](https://vitejs.dev/) – Fast frontend development and build tooling.
+- [**React.js**](https://reactjs.org/) – Interactive and dynamic user interface
+- [**Node.js**](https://nodejs.org/) – JavaScript runtime environment
+- [**Axios**](https://axios-http.com/) – HTTP requests to the backend API
+- [**Vite**](https://vitejs.dev/) – Fast frontend development and build tooling
+- [**Redux**](https://redux.js.org/) – State management for complex user interactions
+- [**Material-UI**](https://mui.com/) – Modern UI components and design system
 
 ### **Backend:**
-- [**Django**](https://www.djangoproject.com/) – High-level Python web framework.
-- [**Django REST Framework**](https://www.django-rest-framework.org/) – RESTful API development.
-- [**Python**](https://www.python.org/) – Backend programming language.
-- [**PyPDF2**](https://pypdf2.readthedocs.io/en/stable/) – Extracts text from PDFs.
+- [**Django**](https://www.djangoproject.com/) – High-level Python web framework
+- [**Django REST Framework**](https://www.django-rest-framework.org/) – RESTful API development
+- [**Python**](https://www.python.org/) – Backend programming language
+- [**PyPDF2**](https://pypdf2.readthedocs.io/en/stable/) – PDF text extraction
+- [**PostgreSQL**](https://www.postgresql.org/) – Robust database management
+- [**Celery**](https://docs.celeryq.dev/) – Asynchronous task processing
 
 ### **AI & NLP:**
-- [**Google Gemini API**](https://ai.google.dev/) – AI-driven resume analysis.
-- [**google-generativeai Python library**](https://pypi.org/project/google-generativeai/) – API interaction library.
+- [**Google Gemini API**](https://ai.google.dev/) – AI-driven resume analysis and matching
+- [**google-generativeai Python library**](https://pypi.org/project/google-generativeai/) – API interaction library
+- [**scikit-learn**](https://scikit-learn.org/) – Machine learning for matching algorithms
 
 ---
 
@@ -113,15 +133,21 @@ Frontend runs at: **http://localhost:5173/**
 ---
 
 ## 🚀 Usage
-1. Open **ResumiFy** in your browser.
-2. Upload your resume in PDF format.
-3. Wait while the AI processes your resume.
-4. View results in a modal:
-   - Overall Score (1-10)
-   - Review of strengths and weaknesses
-   - ATS compatibility assessment
-   - Improvement suggestions
-5. Use the feedback to improve your resume!
+
+### For Job Seekers:
+1. Create an account and complete your profile
+2. Upload your resume in PDF format
+3. Receive AI-powered analysis and suggestions
+4. Get matched with relevant job opportunities
+5. Connect with recruiters directly through the platform
+
+### For Recruiters:
+1. Create a recruiter account
+2. Post job listings with detailed requirements
+3. Use the AI-powered search to find candidates
+4. Review candidate profiles and resumes
+5. Connect with potential candidates
+6. Manage your candidate pipeline
 
 ---
 
