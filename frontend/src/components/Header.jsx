@@ -2,7 +2,7 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 
-const MobileMenu = lazy(() => import("./mobilemenu"));
+const MobileMenu = lazy(() => import("./MobileMenu"));
 
 const navigation = [
   { name: "Home", href: "/" },

@@ -4,7 +4,7 @@ import { useState, Suspense } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "antd";
 import axios from "axios";
-import Header from "./header";
+import Header from "./Header";
 
 const Register = () => {
   const navigate = useNavigate();

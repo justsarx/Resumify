@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Alert } from "antd";
 import axios from "axios";
 
-const Header = lazy(() => import("./header"));
+const Header = lazy(() => import("./Header"));
 
 const backendUrl = import.meta.env.VITE_API_URL;
 

@@ -27,7 +27,7 @@ const TrueFocus = lazy(() =>
   }))
 );
 const Header = lazy(() => 
-  import("./header.jsx").catch(() => ({
+  import("./Header.jsx").catch(() => ({
     default: () => null
   }))
 );
