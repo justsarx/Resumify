@@ -8,14 +8,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 
 // Dynamically import pages
-const Home = lazy(() => import("./components/home"));
-const Upload = lazy(() => import("./components/upload"));
-const Ranks = lazy(() => import("./components/ranks"));
-const JobPost = lazy(() => import("./components/jobpost"));
-const Register = lazy(() => import("./components/register"));
-const Login = lazy(() => import("./components/login"));
-const MyJobs = lazy(() => import("./components/myjobs"));
-const EditJobPost = lazy(() => import("./components/editjobpost"));
+const Home = lazy(() => import("./components/Home"));
+const Upload = lazy(() => import("./components/Upload"));
+const Ranks = lazy(() => import("./components/Ranks"));
+const JobPost = lazy(() => import("./components/JobPost"));
+const Register = lazy(() => import("./components/Register"));
+const Login = lazy(() => import("./components/Login"));
+const MyJobs = lazy(() => import("./components/MyJobs"));
+const EditJobPost = lazy(() => import("./components/EditJobPost"));
 
 function RouteChangeTracker() {
   const location = useLocation();
@@ -68,7 +68,7 @@ class ErrorBoundary extends React.Component {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
@@ -94,6 +94,10 @@ class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
+
+ErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 function App() {
   const location = useLocation();
