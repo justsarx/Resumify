@@ -53,11 +53,13 @@ This project leverages the **Google Gemini API** for intelligent resume evaluati
 
 ### **Frontend:**
 - [**React.js**](https://reactjs.org/) – Interactive and dynamic user interface
-- [**Node.js**](https://nodejs.org/) – JavaScript runtime environment
-- [**Axios**](https://axios-http.com/) – HTTP requests to the backend API
 - [**Vite**](https://vitejs.dev/) – Fast frontend development and build tooling
-- [**Redux**](https://redux.js.org/) – State management for complex user interactions
-- [**Material-UI**](https://mui.com/) – Modern UI components and design system
+- [**Axios**](https://axios-http.com/) – HTTP requests to the backend API
+- [**Ant Design**](https://ant.design/) – Modern UI components and design system
+- [**Tailwind CSS**](https://tailwindcss.com/) – Utility-first CSS framework
+- [**React Router**](https://reactrouter.com/) – Client-side routing
+- [**Framer Motion**](https://www.framer.com/motion/) – Animation library
+- [**Headless UI**](https://headlessui.com/) – Unstyled, accessible UI components
 
 ### **Backend:**
 - [**Django**](https://www.djangoproject.com/) – High-level Python web framework
@@ -65,7 +67,6 @@ This project leverages the **Google Gemini API** for intelligent resume evaluati
 - [**Python**](https://www.python.org/) – Backend programming language
 - [**PyPDF2**](https://pypdf2.readthedocs.io/en/stable/) – PDF text extraction
 - [**PostgreSQL**](https://www.postgresql.org/) – Robust database management
-- [**Celery**](https://docs.celeryq.dev/) – Asynchronous task processing
 
 ### **AI & NLP:**
 - [**Google Gemini API**](https://ai.google.dev/) – AI-driven resume analysis and matching
