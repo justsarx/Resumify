@@ -66,12 +66,10 @@ This project leverages the **Google Gemini API** for intelligent resume evaluati
 - [**Django REST Framework**](https://www.django-rest-framework.org/) – RESTful API development
 - [**Python**](https://www.python.org/) – Backend programming language
 - [**PyPDF2**](https://pypdf2.readthedocs.io/en/stable/) – PDF text extraction
-- [**PostgreSQL**](https://www.postgresql.org/) – Robust database management
 
 ### **AI & NLP:**
 - [**Google Gemini API**](https://ai.google.dev/) – AI-driven resume analysis and matching
 - [**google-generativeai Python library**](https://pypi.org/project/google-generativeai/) – API interaction library
-- [**scikit-learn**](https://scikit-learn.org/) – Machine learning for matching algorithms
 
 ---
 
